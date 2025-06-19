@@ -1,12 +1,19 @@
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+import { createGallery } from './render-function.js';
+import { url } from "./pixabay-api.js";
 
 
 const refs = {
     formEl: document.querySelector('.form'),
     formInputEl: document.querySelector('.form-input-key-word'),
     formBtnEl: document.querySelector('.search-btn'),
+    galleryListEl: document.querySelector(".gallery"),
 }
+
+console.dir(refs.galleryListEl);
 
 
 function handleSubmit(event) {
@@ -24,31 +31,14 @@ function handleSubmit(event) {
         return;
     }
 
-    const options = {
-        baseUrl: "https://pixabay.com/api/",
-        apiKey: import.meta.env.VITE_PIXABAY_API_KEY,
-        query: refs.formInputEl,
-        // query: "elephant",
-        imageType: "photo",
-        orientation: "hohorizontal",
-        safesearch: true,
-    }
-    
-    const url = new URL(options.baseUrl);
-    url.search = new URLSearchParams({
-        key: options.apiKey,
-        q: options.query,
-        imageType: options.imageType,
-        orientation: options.orientation,
-        safesearch: options.safesearch,
-    }).toString();
-
     fetch(url)
         .then(response => {
             return response.json();
         })
         .then(data => {
+            const responseApi = data;
             console.log(data);
+            createGallery(data.hits);
         })
         .catch(error => {
             console.log(error);
@@ -57,22 +47,3 @@ function handleSubmit(event) {
 
 refs.formEl.addEventListener('submit', handleSubmit);
 
-
-
-
-
-
-
-
-
-
-
-    // Pixabay docs
-// var API_KEY = '50902999-34d3d718e1412684e61a556a9';
-// var URL = "https://pixabay.com/api/?key="+API_KEY+"&q="+encodeURIComponent('red roses');
-// $.getJSON(URL, function(data){
-// if (parseInt(data.totalHits) > 0)
-//     $.each(data.hits, function(i, hit){ console.log(hit.pageURL); });
-// else
-//     console.log('No hits');
-// });
