@@ -3,7 +3,7 @@ import "izitoast/dist/css/iziToast.min.css";
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { createGallery } from './render-function.js';
-import { url } from "./pixabay-api.js";
+import { createUrl } from "./pixabay-api.js";
 
 
 const refs = {
@@ -31,6 +31,8 @@ function handleSubmit(event) {
         return;
     }
 
+    const url = createUrl(keyWord);
+
     fetch(url)
         .then(response => {
             return response.json();
@@ -38,11 +40,13 @@ function handleSubmit(event) {
         .then(data => {
             const responseApi = data;
             console.log(data);
-            createGallery(data.hits);
+            createGallery(data.hits.slice(0, 9));
         })
         .catch(error => {
             console.log(error);
         });
+    
+    // refs.formEl.reset();
 }
 
 refs.formEl.addEventListener('submit', handleSubmit);

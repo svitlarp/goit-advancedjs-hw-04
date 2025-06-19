@@ -27,27 +27,79 @@ a {
   color: currentColor;
   text-decoration: none;
 }
-
 /* Form */
+.form {
+  margin: 36px auto 0 auto;
+}
 
 /* Input */
 /* За замовчуванням поле введення є рядковим елементом, який не успадковує сімейство шрифтів */
 input {
+  padding: 8px 16px;
   font-family: inherit;
+  border: 1px solid #808080;
+  width: 272px;
+  height: 40px;
 }
 
-
-input::placeholder {
+/* input::placeholder {
   color: teal;
   font-weight: 700;
-}
+} */
 
 input:hover::placeholder,
 input:focus::placeholder {
-  color: orange;
+  color: #000000;
+}
+
+input:active::placeholder {
+  color: #4E75FF;
 }
 
 /* Button */
+.search-btn {
+  padding: 8px 16px;
+  width: 91px;
+  height: 40px;
+  color: #FFFFFF;
+  background-color: #4E75FF;
+  border: none;
+  border-radius: 8px;
+  text-align: center;
+  opacity: 1;
+}
+
+.search-btn:hover {
+  background-color: #6C8CFF;
+}
 
 
+/* Gallary  */
+.gallery {
+  margin-right: auto;
+  margin-left: auto;
+  padding: 24px 156px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  max-width: 1440px;
+}
 
+.gallery-image {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+}
+
+.gallery-item {
+  width: calc((100% - 2 * 24px) / 3);
+  aspect-ratio: calc(360/300);
+}
+
+.gallery-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
