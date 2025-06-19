@@ -3,10 +3,7 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 
-
-
 const galleryListEl = document.querySelector(".gallery");
-
 
 const createGalleryItemEl = (image) => {
     return `
@@ -24,7 +21,6 @@ const createGalleryItemEl = (image) => {
 }
 
 export function createGallery(images) {
-    const galleryArr2 = images.map(el => console.log(el));
     const galleryArr = images.map(el => createGalleryItemEl(el)).join('');
     galleryListEl.innerHTML = galleryArr;
 

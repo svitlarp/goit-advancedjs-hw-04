@@ -11,16 +11,13 @@ const refs = {
     formInputEl: document.querySelector('.form-input-key-word'),
     formBtnEl: document.querySelector('.search-btn'),
     galleryListEl: document.querySelector(".gallery"),
+    loaderEl: document.querySelector('.loader'),
 }
-
-console.dir(refs.galleryListEl);
-
 
 function handleSubmit(event) {
     event.preventDefault();
     const keyWord = event.target.elements.keyword.value;
     console.log(keyWord);
-    console.log(typeof keyWord);
 
     if (keyWord === '') {
         iziToast.warning({
@@ -31,6 +28,7 @@ function handleSubmit(event) {
         return;
     }
 
+    refs.loaderEl.classList.remove('hidden');
     const url = createUrl(keyWord);
 
     fetch(url)
@@ -40,13 +38,14 @@ function handleSubmit(event) {
         .then(data => {
             const responseApi = data;
             console.log(data);
+            refs.loaderEl.classList.add('hidden');
             createGallery(data.hits.slice(0, 9));
         })
         .catch(error => {
             console.log(error);
         });
     
-    // refs.formEl.reset();
+    refs.formEl.reset();
 }
 
 refs.formEl.addEventListener('submit', handleSubmit);
