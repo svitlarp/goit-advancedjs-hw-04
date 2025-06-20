@@ -2,8 +2,8 @@ import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import { createGallery } from './render-function.js';
-import { createUrl } from "./pixabay-api.js";
+import { createGallery } from './js/render-function.js';
+import { createUrl } from "./js/pixabay-api.js";
 
 
 const refs = {

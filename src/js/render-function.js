@@ -25,7 +25,6 @@ export function createGallery(images) {
     galleryListEl.innerHTML = galleryArr;
 
     const lightbox = new SimpleLightbox('.gallery a', {
-      // captionsData: 'alt',
       captionsData: 'title',
         captionDelay: 250,
       });
