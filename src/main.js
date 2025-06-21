@@ -86,6 +86,14 @@ async function handleLoadMoreBtnClick(keyWord) {
         console.log(currentPage);
         createGallery(data.hits);
 
+        const {height: cardHeight} = document.querySelector('.gallery').firstElementChild.getBoundingClientRect();
+        console.log(cardHeight);
+
+        window.scrollBy({
+            top: cardHeight * 2,
+            behavior: "smooth",
+          });
+
         if (currentPage * 15 >= data.totalHits) {
             refs.formLoadMoreBtn.classList.add('hidden');
             iziToast.info({
