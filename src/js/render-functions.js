@@ -22,7 +22,8 @@ const createGalleryItemEl = (image) => {
 
 export function createGallery(images) {
     const galleryArr = images.map(el => createGalleryItemEl(el)).join('');
-    galleryListEl.innerHTML = galleryArr;
+  galleryListEl.innerHTML = galleryArr;
+  // galleryListEl.insertAdjacentHTML('beforeend', galleryArr);
 
     const lightbox = new SimpleLightbox('.gallery a', {
       captionsData: 'title',
