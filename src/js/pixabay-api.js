@@ -1,7 +1,7 @@
 export function createUrl(keyword) {
     const options = {
         baseUrl: "https://pixabay.com/api/",
-        apiKey: import.meta.env.VITE_PIXABAY_API_KEY,
+        apiKey: '50902999-34d3d718e1412684e61a556a9',
         query: keyword,
         imageType: "photo",
         orientation: "hohorizontal",
