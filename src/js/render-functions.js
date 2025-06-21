@@ -4,6 +4,10 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 
 const galleryListEl = document.querySelector(".gallery");
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'title',
+  captionDelay: 250,
+  });
 
 const createGalleryItemEl = (image) => {
     return `
@@ -22,11 +26,7 @@ const createGalleryItemEl = (image) => {
 
 export function createGallery(images) {
     const galleryArr = images.map(el => createGalleryItemEl(el)).join('');
-  galleryListEl.innerHTML = galleryArr;
-  // galleryListEl.insertAdjacentHTML('beforeend', galleryArr);
+    galleryListEl.insertAdjacentHTML('beforeend', galleryArr);
 
-    const lightbox = new SimpleLightbox('.gallery a', {
-      captionsData: 'title',
-        captionDelay: 250,
-      });
+    lightbox.refresh();
 }

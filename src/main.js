@@ -19,9 +19,13 @@ const refs = {
 let currentPage = 1;
 let keyWord = '';
 
+refs.formLoadMoreBtn.addEventListener('click', () => {
+    handleLoadMoreBtnClick(keyWord);
+});
+
 async function handleSubmit(event) {
     event.preventDefault();
-    keyWord = event.target.elements.keyword.value;
+    keyWord = event.target.elements.keyword.value.trim();
     console.log(keyWord);
 
     if (keyWord === '') {
@@ -42,20 +46,21 @@ async function handleSubmit(event) {
         const data = response.data;
         console.log(data);
         console.log(data.totalHits);
+        refs.galleryListEl.innerHTML = '';
 
 
         if (data.total === 0) {
-            alert(`Зображень по ключовому слову ${keyWord} не знайдено`);
-            // refs.gallery.innerHTML = '';
+            aiziToast.warning({
+                title: 'Caution',
+                message: 'Any image matches with given keyword.',
+                position: 'topRight',
+            });
+            refs.loaderEl.classList.add('hidden');
             return;
           }
       
           if (data.totalHits > 1) {
             refs.formLoadMoreBtn.classList.remove('hidden');
-            refs.formLoadMoreBtn.addEventListener('click', () => {
-                  handleLoadMoreBtnClick(keyWord)
-            });
-            createGallery(data.hits);  
           }
 
         createGallery(data.hits);
@@ -78,6 +83,17 @@ async function handleLoadMoreBtnClick(keyWord) {
         const response = await axios.get(url);
         const data = response.data;
         console.log(data);
+        console.log(currentPage);
+        createGallery(data.hits);
+
+        if (currentPage * 15 >= data.totalHits) {
+            refs.formLoadMoreBtn.classList.add('hidden');
+            iziToast.info({
+                title: 'Caution',
+                message: "We're sorry, but you've reached the end of search results.",
+                position: 'topRight',
+              }); 
+        }
     } catch (err) {
         console.error(error);
     }
