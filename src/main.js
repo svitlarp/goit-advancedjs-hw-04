@@ -25,6 +25,7 @@ refs.formLoadMoreBtn.addEventListener('click', () => {
 
 async function handleSubmit(event) {
     event.preventDefault();
+    currentPage = 1;
     keyWord = event.target.elements.keyword.value.trim();
     console.log(keyWord);
 
@@ -38,6 +39,8 @@ async function handleSubmit(event) {
     }
 
     refs.loaderEl.classList.remove('hidden');
+    refs.galleryListEl.innerHTML = '';
+    refs.formLoadMoreBtn.classList.add('hidden');
 
     const url = createUrl(keyWord, currentPage);
 
