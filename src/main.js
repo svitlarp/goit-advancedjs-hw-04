@@ -53,7 +53,7 @@ async function handleSubmit(event) {
 
 
         if (data.total === 0) {
-            aiziToast.warning({
+            iziToast.warning({
                 title: 'Caution',
                 message: 'Any image matches with given keyword.',
                 position: 'topRight',
@@ -62,7 +62,7 @@ async function handleSubmit(event) {
             return;
           }
       
-          if (data.totalHits > 1) {
+          if (data.totalHits > 15) {
             refs.formLoadMoreBtn.classList.remove('hidden');
           }
 
